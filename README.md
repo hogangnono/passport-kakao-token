@@ -4,7 +4,30 @@ This module provides to authenticate with an access token on connect middleware 
 
 It forked from [passport-kakao](https://github.com/rotoshine/passport-kakao) and refered from [passport-facebook-token](https://github.com/drudge/passport-facebook-token).
 
+## Installation
+
+```
+$ npm install passport-kakao-token
+```
+
 ## How to Use
+
+### Configure Strategy
+
+```
+const KakaoTokenStrategy = require('passport-kakao-token');
+ 
+passport.use(new KakaoTokenStrategy({
+    clientID: KAKAO_CLIENT_ID
+  }, function(accessToken, refreshToken, profile, done) {
+    User.findOrCreate({kakaoId: profile.id}, function (error, user) {
+      return done(error, user);
+    });
+  }
+));
+```
+
+### Authenticate Requests
 
 You can authenticate with calling REST API like below.
 ```
